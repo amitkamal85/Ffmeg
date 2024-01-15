@@ -1,0 +1,403 @@
+﻿@*@model NotFinal.Controllers.Displaysingle
+
+@{
+    ViewData["Title"] = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Display</h1>
+
+<div>
+    <h4>VideoConfig</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Video)
+        </dt>
+        <dd class = "col-sm-10">
+           <video src="@Model.Video" width="300" height="200" controls loop />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resolution)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Resolution)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MediumQuality)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MediumQuality)
+       
+    </dl>
+</div>*@
+@model NotFinal.Controllers.Displaysingle
+
+@{
+    ViewData["Title"] = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>Hello, world!</title>
+    <style>
+        .top-nav ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            margin: 0 0 5px 0;
+        }
+
+            .top-nav ul li a {
+                font-size: 16px;
+                font-weight: 500;
+                color: gray !important;
+                margin: 0 0 0 30px;
+                text-decoration: none;
+            }
+
+                .top-nav ul li a.active {
+                    color: #0067ef !important;
+                }
+
+        .video_png {
+            width: 100%;
+        }
+
+        .fullpage-div.new___data ul.create_ul {
+            background: #137e90;
+            padding: 10px 15px !important;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+
+        .fullpage-div.new___data .create_ul li p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .fullpage-div.new___data {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 6px
+        }
+
+        .data-under-all-p1 {
+            font-size: 14px;
+            margin: 0 0 15px 0;
+        }
+
+        .data-under-all-p {
+            font-size: 14px;
+            margin: 0 0 15px 0;
+        }
+
+            .data-under-all-p a {
+                background: #30272a;
+                color: #fff;
+                text-decoration: none;
+                padding: 3px 7px;
+                border-radius: 5px;
+                margin-left: 7px;
+            }
+
+        .data-under-all {
+            padding: 30px 30px 15px 30px;
+        }
+
+        .grid-custom ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+            .grid-custom ul li {
+                border: 1px solid #dddddd;
+                padding: 15px;
+                width: 24%;
+                margin: 0 0 15px 0;
+            }
+
+        .grid_div_1 {
+            background: #137e90;
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 6px;
+            font-size: 25px;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .duration-p {
+            font-size: 14px;
+            margin: 0 0 0px 0;
+        }
+
+        .duration-p1 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .grid_div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+
+        /*media(max-width: 991px) {
+            .grid-custom ul li {
+                width: 32%;
+            }
+        }
+
+        media(max-width: 767px) {
+            .grid-custom ul li {
+                width: 100%;
+            }
+
+            .data-under-all-p a {
+                display: block;
+                margin: 0;
+            }
+
+            .data-under-all {
+                padding: 15px 15px 0px 15px;
+            }
+        }*/
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="top-nav">
+                    <ul>
+                        <li><a class="active" href="">Home</a></li>
+                        <li><a href="">Video Management</a></li>
+                        <li><a href="">Creat Video</a></li>
+                    </ul>
+                </div>
+                <p type="text" id="TEXT"  style="display:none;" >@Model.Id</p>
+                <div class="video-sec">
+                    <video id="videoplayer" src="@Model.Video" width="1270" height="710" controls loop></video>
+                    <select class="form-control" id="Quality" name="QualityDropDown" >
+                        <option>Original</option> 
+                        <option value="250p">250p</option> 
+                        <option>360p</option> 
+                        <option>480p</option> 
+                        <option>720p</option> 
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="fullpage-div new___data">
+                    <ul class="create_ul">
+                        <li>
+                            <p id="Title">@Model.Title</p>
+                        </li>
+                    </ul>
+                    <div class="data-under-all">
+                        <p class="data-under-all-p1" id="Sypnosys">@Model.Sypnosys</p>
+                        <!--<p class="data-under-all-p">
+                            Video Management <a href="">Video Management Video Management</a>
+                        </p>
+                        <p class="data-under-all-p">
+                            Video Management <a href="">Video Management Video Management</a>
+                        </p>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="grid-custom">
+                    <ul>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-gear"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1" id="Duration">@Model.Duration</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1 yellow">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">File Size</p>
+                                    <p class="duration-p1" id="Size">@Model.Size</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Resolutoin</p>
+                                    <p class="duration-p1" id="Resolution">@Model.Resolution</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1" id="Duration">@Model.Duration</p>
+                                </div>
+                            </div>
+                        </li>
+                        <!--<li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1">1 min 40sec</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1">1 min 40sec</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1">1 min 40sec</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="grid_div">
+                                <div class="grid_div_1">
+                                    <i class="fa-solid fa-circle-play"></i>
+                                </div>
+                                <div class="grid_div_2">
+                                    <p class="duration-p">Video Duration</p>
+                                    <p class="duration-p1">1 min 40sec</p>
+                                </div>
+                            </div>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts
+{
+    <script>
+    $("#Quality").change(function ()
+    {
+        debugger;
+    if($("#Quality").val()=="Original")
+    {
+        changedata(0);
+    }if($("#Quality").val()=="250p")
+    {
+        changedata(1);
+    }if($("#Quality").val()=="360p")
+    {
+        changedata(2);
+    }if($("#Quality").val()=="480p")
+    {
+        changedata(3);
+    }if($("#Quality").val()=="720p")
+    {
+        changedata(4);
+    }
+    });
+    function changedata(b){
+        debugger;
+        var dara = $("#TEXT").val();
+        $.ajax({
+            type:"Post",
+            data:{id:$("#TEXT").val(),a:b},
+
+            url:"/Listing/fileinfo",
+
+            success:function(response)
+            {
+                $("#videoplayer").attr('src',response.Video);
+                $("#Title").text=response.Title;
+                $("#Sypnosys").text=response.Sypnosys;
+                $("#Duration").text=response.Duration;
+                $("#Size").text=response.Size;
+                $("#Resolution").text=response.Resolution;
+            }
+
+        });
+    }
+</script>
+}

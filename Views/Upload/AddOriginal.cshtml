@@ -1,0 +1,691 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+@*    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">*@
+
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <style>
+        .create {
+            background: #353a40;
+            padding: 10px;
+        }
+
+        .create-p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .under-form-section {
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+        }
+
+        .form-custom {
+            padding: 60px 0;
+        }
+
+        .form-div {
+            padding: 20px;
+        }
+
+        .repet-input label {
+            min-width: 75px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0px 15px 0 0;
+        }
+
+        .repet-input input {
+            width: 100%;
+            border: 1px solid #dddddd;
+            height: 50px;
+            line-height: 42px;
+            padding: 0 15px;
+            border-radius: 6px;
+        }
+
+        .cus-progress .sr-only {
+            background: #28a646;
+            line-height: 50px;
+            height: 50px;
+            display: block;
+        }
+
+        .cus-progress .progress-bar {
+            height: 50px;
+        }
+
+        .cus-progress .progress {
+            height: 50px;
+            width: 100% !important;
+        }
+
+        .cus-progress {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .repet-input {
+            display: flex;
+            align-items: center;
+            margin: 0 0 15px 0;
+        }
+
+        .create ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upload-bt {
+            font-weight: 600;
+            background: #28a646;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+            height: 40px;
+            ;
+            padding: 0 15px;
+        }
+
+            .upload-bt span {
+                margin-left: 2px;
+            }
+
+        .repet-input textarea {
+            width: 100%;
+            border: 1px solid #dddddd;
+            height: 110px;
+            line-height: 42px;
+            border-radius: 6px;
+            padding: 0 15px;
+            resize: none;
+        }
+
+        .repet-input input[type="file"] {
+            padding: 0;
+        }
+
+        .upload-bt.crt {
+            background: blue;
+        }
+
+        .uploading-ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+        }
+
+        .left-b {
+            font-weight: 600;
+            background: #dc3345;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+            height: 40px;
+            padding: 0 15px;
+            margin: 0;
+            line-height: 40px;
+            text-align: center;
+        }
+
+            .left-b.bk-diff {
+                background: #353a40;
+            }
+
+        .progress {
+            line-height: 40px;
+            height: 40px;
+            display: block;
+            width: 100%;
+            margin: 0 15px;
+        }
+
+        .uploading-ul li {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            margin: 0 0 15px 0;
+        }
+
+        .sr-only {
+            background: #28a646;
+        }
+
+        .uploading-ul li:last-child {
+            margin: 0;
+        }
+
+        .top-nav ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            margin: 0 0 5px 0;
+        }
+
+            .top-nav ul li a {
+                font-size: 16px;
+                font-weight: 500;
+                color: gray !important;
+                margin: 0 0 0 30px;
+                text-decoration: none;
+            }
+
+                .top-nav ul li a.active {
+                    color: blue !important;
+                }
+    </style>
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+
+    <div class="form-custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="top-nav">
+                        <ul>
+                            <li><a>Home</a></li>
+                            <li><a>Video Management</a></li>
+                            <li><a>Create Video</a></li>
+                        </ul>
+                    </div>
+                    <div class="under-form-section">
+                        <div class="create">
+                            <ul>
+                                <li><p class="create-p">Create new video</p></li>
+                                <li><button class="upload-bt crt" id="Create">Create</button><button class="upload-bt" id="Uploading">Uploading <span>95%</span></button></li>
+                            </ul>
+                        </div>
+                        <div class="form-div">
+                            <input type="text" id="TEXT" style="display:none;" />
+                            <form enctype="multipart/form-data" id="VideoForm">
+                                @* asp-action="AddVideo" method="Post"*@
+                                <div class="repet-input" id="input">
+                                    <label>Video</label><input type="file" name="video" class="custom-file-input" id="getvideo">
+                                    @* <input type="submit" id="SubmitButton"/>*@
+                                </div>
+                            </form>
+                            <div class="repet-input">
+                                <div class="cus-progress" id="VideoProgress">
+                                    <label>Video</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" id="Progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                            @*<span class="sr-only">70% Complete</span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="repet-input" id="Title">
+                                <label>Title</label><input type="text" id="IdText" name="">
+                            </div>
+                            <div class="repet-input" id="Synopsis">
+                                <label>SynopSis</label><textarea id="SynopsisText" placeholder="Enter...."></textarea>
+                            </div>
+
+                            <div class="repet-input" id="Quality">
+                                <ul class="uploading-ul">
+                                    <li>
+                                        <p class="left-b">240p</p>
+                                        @* <div class="progress">
+                                            <div class="progress-bar" role="progressbar" id="240p" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+
+
+                                            </div>
+                                            </div>
+                                            <p class="left-b bk-diff">2%</p>*@
+
+                                        <div class="progress" id="progress1" style="display: none">
+                                            <div class="progress-bar" id="progress-bar1" role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p class="left-b">360p</p>
+                                        <div class="progress" id="progress2">
+                                            <div class="progress-bar" id="progress-bar2" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                                @*                          <span class="sr-only">70% Complete</span>
+                                                *@
+                                            </div>
+                                        </div>
+                                       @* <p class="left-b bk-diff">2%</p>*@
+                                    </li>
+                                    <li>
+                                        <p class="left-b">480p</p>
+                                        <div class="progress"  id="progress3">
+                                            <div class="progress-bar" id="progress-bar3"  role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                                @*                          <span class="sr-only">70% Complete</span>
+                                                *@
+                                            </div>
+                                        </div>
+                                     @*   <p class="left-b bk-diff">2%</p>*@
+                                    </li>
+                                    <li>
+                                        <p class="left-b">720p</p>
+                                        <div class="progress"  class="progress4">
+                                            <div class="progress-bar" id="progress-bar4" role="progressbar"  aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                                @*                          <span class="sr-only">70% Complete</span>
+                                                *@
+                                            </div>
+                                        </div>
+                                    @*    <p class="left-b bk-diff">2%</p>*@
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js">
+    //const { post } = require("jquery");
+
+    //const { error } = require("jquery");
+</script>
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+@section Scripts
+ {
+<script>
+     var Id=0;
+
+     $(document).ready( function(){
+     $("#Uploading").hide();
+     $("#SubmitButton").hide();
+     $("#VideoProgress").hide();
+     $("#Title").hide();
+     $("#Synopsis").hide();
+     $("#Quality").hide();
+
+     });
+    $("#Create").click(function(){
+        debugger;
+        var Title=$("#IdText").val();
+        var SynopsisText=$("#SynopsisText").val();
+        var ids= $("#TEXT").val();
+        if(ids == "")
+        {
+            alert("Please Add Video First")
+        }
+        else if(Title==""){
+            alert("Please Enter Title");
+        }
+        else if(SynopsisText==""){
+            alert("Please Enter Synopsis");
+        }
+        else{
+                $.ajax({
+                type: "POST",
+
+                url:'/Upload/UpdateStatus',
+
+                data: {id:ids,title:Title, Sypnosis:SynopsisText},
+
+                success:function(){
+                    $("#SubmitButton").hide();
+                    $("#VideoProgress").hide();
+                    $("#Title").hide();
+                    $("#Synopsis").hide();
+                    $("#Create").hide();
+                    $("#Uploading").show();
+                    $("#Uploading").html('Encoding in progress....');
+                    $("#input").hide();
+                    $("#Quality").show();
+                    lowquality(Id);
+
+                }
+
+                });
+            }
+    });
+
+     $("#getvideo").change( function(){
+         debugger;
+
+         $("#VideoProgress").show();
+         $("#input").hide();
+         // $("#SubmitButton").click();
+         UploadFile();
+         // var video = new FormData($("#getvideo")[0].files[0]);
+         ////async video.append("video", $("#getvideo")[0].files[0]);
+         //// //window.setTimeout( "   ", 15000 )
+         //  $.ajax({
+         //       url: '/Upload/AddVideo',
+         //       type: 'POST',
+         //       data: video,
+         //       async:true,
+         //       cache: false,
+         ////       contentType: false,
+         ////       processData: false,
+         //       success: function (id) {
+         //           $("#fileProgress").hide();
+         //           if(id!=0)
+         //           {
+         //               alert("Kaam kr rha hai");
+         //           }
+         //           else{
+         //               alert("Kaam nhi kr rha");
+         //           }
+         //       },
+
+         //   });
+
+     });
+
+     function lowquality(id){
+
+        var ids= $("#TEXT").val();
+      
+             $.ajax({
+                    url:'/Upload/Convert240p',
+                    type: 'POST',
+                    data: {id:ids},
+                    cache: false,
+                    //contentType: false,
+                    //processData: false,
+                    success: function (file) {
+                        setTimeout(function () {
+                            $("#progress1").show();
+                            //$("#lblMessage").html("<b>" + file.name + "</b> has been uploaded.");
+                              Medium(file);
+                        }, 10000);
+
+                      
+                    },
+                    error: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    failure: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("#progress1").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    var percentage = Math.ceil(((e.loaded / e.total) * 100));
+                                    $('#progress-bar1').text(percentage + '%');
+                                    $('#progress-bar1').width(percentage + '%');
+                                    if (percentage == 100) {
+                                        $('#progress-bar1').text('100%');
+                                    }
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+
+
+
+
+
+
+
+       
+     };
+     function Medium(ido){
+         
+         var ids= $("#TEXT").val();
+  
+
+         
+             $.ajax({
+                    url:'/Upload/Convert360p',
+                    type: 'POST',
+                    data: {id:ids},
+                    cache: false,
+                    //contentType: false,
+                    //processData: false,
+                    success: function (file) {
+                        setTimeout(function () {
+                            $("#progress2").show();
+                        UpperMedium(file);
+                        }, 12000);
+                    },
+                    error: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    failure: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("#progress2").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    var percentage = Math.ceil(((e.loaded / e.total) * 100));
+                                    $('#progress-bar2').text(percentage + '%');
+                                    $('#progress-bar2').width(percentage + '%');
+                                    if (percentage == 100) {
+                                        $('#progress-bar2').text('100%');
+                                    }
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+
+
+
+
+     };
+     function UpperMedium(ido){
+         var ids= $("#TEXT").val();
+   
+
+
+           $.ajax({
+                    url:'/Upload/Convert480p',
+                    type: 'POST',
+                    data: {id:ids},
+                    cache: false,
+                    //contentType: false,
+                    //processData: false,
+                    success: function (file) {
+                        setTimeout(function () {
+                            $("#progress3").show();
+                          High(file);
+                        }, 14000);
+                    },
+                    error: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    failure: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("#progress3").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    var percentage = Math.ceil(((e.loaded / e.total) * 100));
+                                    $('#progress-bar3').text(percentage + '%');
+                                    $('#progress-bar3').width(percentage + '%');
+                                    if (percentage == 100) {
+                                        $('#progress-bar3').text('100%');
+                                    }
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+     };
+     function High(ido){
+         var ids= $("#TEXT").val();
+        
+
+          $.ajax({
+                    url:'/Upload/Convert720p',
+                    type: 'POST',
+                    data: {id:ids},
+                    cache: false,
+                    //contentType: false,
+                    //processData: false,
+                    success: function (file) {
+                        setTimeout(function () {
+                            $("#progress4").show();
+                             $("#Uploading").html('Encoding completed....');
+                        }, 16000);
+
+                    },
+                    error: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    failure: function (a) {
+                        $("#lblMessage").html(a.responseText);
+                    },
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("#progress4").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    var percentage = Math.ceil(((e.loaded / e.total) * 100));
+                                    $('#progress-bar4').text(percentage + '%');
+                                    $('#progress-bar4').width(percentage + '%');
+                                    if (percentage == 100) {
+                                        $('#progress-bar4').text('100%');
+                                    }
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+     };
+
+
+     $("#Create").click(function(){
+
+     });
+
+
+
+
+
+       function UploadFile() {
+        
+        var fileUpload = $("#getvideo").get(0);
+
+        var files = fileUpload.files;
+
+        var data = new FormData();
+
+        data.append(files[0].name, files[0]);
+
+
+        $.ajax({
+
+            type: "POST",
+
+             url:'/Upload/AddVideo',
+
+            contentType: false,
+
+            processData: false,
+
+            data: data,
+
+            async: false,
+
+             uploadProgress: function(event, position, total, percentComplete) {
+                 changeProgress(percentComplete);
+            },
+
+            success: function (message) {
+                console.log(message)
+                //debugger;
+                //alert(message);
+                $("#TEXT").val(message);
+                changeProgress(100);
+                //Id=message;
+                //lowquality(message);
+                //$("#VideoProgress").show();
+                //$("#input").hide();
+                $("#Title").show();
+                $("#Synopsis").show();
+
+                //id=message;
+            //     $("#Progress").progressbar({
+            //    value: 100
+
+            //});
+            },
+
+            error: function () {
+
+                alert("Error!");
+
+            },
+
+            //complete: function () {
+
+            //    $("#divloader").hide()
+
+            //}
+
+        });
+
+    }
+
+    function changeProgress(percent) {
+        $('#Progress')[0].style.width = `${percent}%`;
+    }
+
+    async function AfterAddVideo(oFormElement){
+         var resultElement = oFormElement.elements.namedItem("video");
+    const formData = new FormData(oFormElement);
+    debugger;
+    try {
+      const response = await fetch(oFormElement.action, {
+      method: 'POST',
+      body: formData
+    });
+    debugger;
+    if (response) {
+      if(response.Id!=0)
+      {
+          $("#Title").show();
+          $("#Synopsis").hide();
+      }
+    }
+
+    }
+    catch (error) {
+      console.error('Error:', error);
+    }
+
+     };
+
+
+</script>
+ }
